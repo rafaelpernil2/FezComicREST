@@ -1,0 +1,27 @@
+*.class
+
+# Mobile Tools for Java (J2ME)
+.mtj.tmp/
+
+# Package Files #
+*.jar
+*.war
+*.ear
+
+# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
+hs_err_pid*
+
+
+# NETBEANS from https://github.com/github/gitignore/blob/master/Global/NetBeans.gitignore #
+
+
+
+# Additionals for NBeans from stackOverflow (http://stackoverflow.com/questions/2586097/what-should-be-in-gitignore-file-for-a-netbeans-java-project)
+
+
+/B3clienteREST/nbproject/private/
+/B3servidorREST/nbproject/private/
+/B3servidorREST/src/conf/META-INF/glassfish-resources\.xml
+
+/B3servidorREST/build.xml
+/B3clienteREST/build.xml
