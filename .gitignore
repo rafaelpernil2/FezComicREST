@@ -25,3 +25,4 @@ hs_err_pid*
 
 /B3servidorREST/build.xml
 /B3clienteREST/build.xml
+B3clienteREST/

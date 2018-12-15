@@ -32,7 +32,7 @@ import javax.xml.bind.annotation.XmlTransient;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Serie.findAll", query = "SELECT s FROM Serie s")
-    , @NamedQuery(name = "Serie.findByIdserie", query = "SELECT s FROM Serie s WHERE s.idserie = :idserie")
+    , @NamedQuery(name = "Serie.findById", query = "SELECT s FROM Serie s WHERE s.id = :id")
     , @NamedQuery(name = "Serie.findByNombre", query = "SELECT s FROM Serie s WHERE s.nombre = :nombre")
     , @NamedQuery(name = "Serie.findByAnotacionPrivada", query = "SELECT s FROM Serie s WHERE s.anotacionPrivada = :anotacionPrivada")
     , @NamedQuery(name = "Serie.findByGenero", query = "SELECT s FROM Serie s WHERE s.genero = :genero")})
@@ -42,15 +42,15 @@ public class Serie implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "idserie")
-    private Integer idserie;
+    @Column(name = "id")
+    private Integer id;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 60)
     @Column(name = "nombre")
     private String nombre;
     @Size(max = 200)
-    @Column(name = "anotacionPrivada")
+    @Column(name = "anotacion_privada")
     private String anotacionPrivada;
     @Basic(optional = false)
     @NotNull
@@ -63,22 +63,22 @@ public class Serie implements Serializable {
     public Serie() {
     }
 
-    public Serie(Integer idserie) {
-        this.idserie = idserie;
+    public Serie(Integer id) {
+        this.id = id;
     }
 
-    public Serie(Integer idserie, String nombre, String genero) {
-        this.idserie = idserie;
+    public Serie(Integer id, String nombre, String genero) {
+        this.id = id;
         this.nombre = nombre;
         this.genero = genero;
     }
 
-    public Integer getIdserie() {
-        return idserie;
+    public Integer getId() {
+        return id;
     }
 
-    public void setIdserie(Integer idserie) {
-        this.idserie = idserie;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getNombre() {
@@ -117,7 +117,7 @@ public class Serie implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (idserie != null ? idserie.hashCode() : 0);
+        hash += (id != null ? id.hashCode() : 0);
         return hash;
     }
 
@@ -128,7 +128,7 @@ public class Serie implements Serializable {
             return false;
         }
         Serie other = (Serie) object;
-        if ((this.idserie == null && other.idserie != null) || (this.idserie != null && !this.idserie.equals(other.idserie))) {
+        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
         return true;
@@ -136,7 +136,7 @@ public class Serie implements Serializable {
 
     @Override
     public String toString() {
-        return "app.entities.Serie[ idserie=" + idserie + " ]";
+        return "app.entities.Serie[ id=" + id + " ]";
     }
     
 }

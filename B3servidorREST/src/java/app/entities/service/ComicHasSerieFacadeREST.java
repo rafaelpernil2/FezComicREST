@@ -5,12 +5,17 @@
  */
 package app.entities.service;
 
+import app.entities.Comic;
 import app.entities.ComicHasSerie;
 import app.entities.ComicHasSeriePK;
+import app.entities.Serie;
+import app.utils.CORSSharingFilter;
+import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -43,31 +48,33 @@ public class ComicHasSerieFacadeREST extends AbstractFacade<ComicHasSerie> {
          */
         app.entities.ComicHasSeriePK key = new app.entities.ComicHasSeriePK();
         javax.ws.rs.core.MultivaluedMap<String, String> map = pathSegment.getMatrixParameters();
-        java.util.List<String> comicidComic = map.get("comicidComic");
+        java.util.List<String> comicidComic = map.get("idComic");
         if (comicidComic != null && !comicidComic.isEmpty()) {
-            key.setComicidComic(new java.lang.Integer(comicidComic.get(0)));
+            key.setIdComic(new java.lang.Integer(comicidComic.get(0)));
         }
-        java.util.List<String> serieIdserie = map.get("serieIdserie");
+        java.util.List<String> serieIdserie = map.get("idSerie");
         if (serieIdserie != null && !serieIdserie.isEmpty()) {
-            key.setSerieIdserie(new java.lang.Integer(serieIdserie.get(0)));
+            key.setIdSerie(new java.lang.Integer(serieIdserie.get(0)));
         }
         return key;
     }
 
     public ComicHasSerieFacadeREST() {
         super(ComicHasSerie.class);
+       
     }
 
     @POST
     @Override
-    @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    @Consumes(MediaType.APPLICATION_JSON)
     public void create(ComicHasSerie entity) {
+        
         super.create(entity);
     }
 
     @PUT
     @Path("{id}")
-    @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    @Consumes(MediaType.APPLICATION_JSON)
     public void edit(@PathParam("id") PathSegment id, ComicHasSerie entity) {
         super.edit(entity);
     }
@@ -80,23 +87,55 @@ public class ComicHasSerieFacadeREST extends AbstractFacade<ComicHasSerie> {
     }
 
     @GET
-    @Path("{id}")
-    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public ComicHasSerie find(@PathParam("id") PathSegment id) {
-        app.entities.ComicHasSeriePK key = getPrimaryKey(id);
+    @Path("comichasserie/{comicId}/{serieId}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public ComicHasSerie find(@PathParam("comicId") int comicId,@PathParam("serieId") int serieId) {
+        app.entities.ComicHasSeriePK key = new ComicHasSeriePK(comicId, serieId);
         return super.find(key);
+    }
+    
+    @GET
+    @Path("comics/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Comic> findComics(@PathParam("id") int id) {
+        //app.entities.ComicHasSeriePK key = getPrimaryKey(id);
+        
+         Query q = em.createNamedQuery("ComicHasSerie.findByIdSerie");
+         q.setParameter("idSerie", id);
+         List<Comic> resultado = new ArrayList<Comic>();
+         List<ComicHasSerie> resultadoQuery = q.getResultList();
+         for(ComicHasSerie c :resultadoQuery  ){
+            resultado.add(c.getComic());
+         }
+         return resultado;  
     }
 
     @GET
+    @Path("serie/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Serie> findSerie(@PathParam("id") int id) {
+        //app.entities.ComicHasSeriePK key = getPrimaryKey(id);
+        
+         Query q = em.createNamedQuery("ComicHasSerie.findByIdComic");
+         q.setParameter("idComic", id);
+         List<Serie> resultado = new ArrayList<Serie>();
+         List<ComicHasSerie> resultadoQuery = q.getResultList();
+         for(ComicHasSerie c :resultadoQuery  ){
+            resultado.add(c.getSerie());
+         }
+         return resultado;  
+    }
+    
+    @GET
     @Override
-    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    @Produces(MediaType.APPLICATION_JSON)
     public List<ComicHasSerie> findAll() {
         return super.findAll();
     }
 
     @GET
     @Path("{from}/{to}")
-    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    @Produces(MediaType.APPLICATION_JSON)
     public List<ComicHasSerie> findRange(@PathParam("from") Integer from, @PathParam("to") Integer to) {
         return super.findRange(new int[]{from, to});
     }

@@ -26,8 +26,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "ComicHasSerie.findAll", query = "SELECT c FROM ComicHasSerie c")
-    , @NamedQuery(name = "ComicHasSerie.findByComicidComic", query = "SELECT c FROM ComicHasSerie c WHERE c.comicHasSeriePK.comicidComic = :comicidComic")
-    , @NamedQuery(name = "ComicHasSerie.findBySerieIdserie", query = "SELECT c FROM ComicHasSerie c WHERE c.comicHasSeriePK.serieIdserie = :serieIdserie")
+    , @NamedQuery(name = "ComicHasSerie.findByIdComic", query = "SELECT c FROM ComicHasSerie c WHERE c.comicHasSeriePK.idComic = :idComic")
+    , @NamedQuery(name = "ComicHasSerie.findByIdSerie", query = "SELECT c FROM ComicHasSerie c WHERE c.comicHasSeriePK.idSerie = :idSerie")
     , @NamedQuery(name = "ComicHasSerie.findByAnotacionPublica", query = "SELECT c FROM ComicHasSerie c WHERE c.anotacionPublica = :anotacionPublica")})
 public class ComicHasSerie implements Serializable {
 
@@ -35,12 +35,12 @@ public class ComicHasSerie implements Serializable {
     @EmbeddedId
     protected ComicHasSeriePK comicHasSeriePK;
     @Size(max = 200)
-    @Column(name = "anotacionPublica")
+    @Column(name = "anotacion_publica")
     private String anotacionPublica;
-    @JoinColumn(name = "comic_idComic", referencedColumnName = "idComic", insertable = false, updatable = false)
+    @JoinColumn(name = "id_comic", referencedColumnName = "id", insertable = false, updatable = false)
     @ManyToOne(optional = false)
     private Comic comic;
-    @JoinColumn(name = "serie_idserie", referencedColumnName = "idserie", insertable = false, updatable = false)
+    @JoinColumn(name = "id_serie", referencedColumnName = "id", insertable = false, updatable = false)
     @ManyToOne(optional = false)
     private Serie serie;
 
@@ -51,8 +51,8 @@ public class ComicHasSerie implements Serializable {
         this.comicHasSeriePK = comicHasSeriePK;
     }
 
-    public ComicHasSerie(int comicidComic, int serieIdserie) {
-        this.comicHasSeriePK = new ComicHasSeriePK(comicidComic, serieIdserie);
+    public ComicHasSerie(int idComic, int idSerie) {
+        this.comicHasSeriePK = new ComicHasSeriePK(idComic, idSerie);
     }
 
     public ComicHasSeriePK getComicHasSeriePK() {

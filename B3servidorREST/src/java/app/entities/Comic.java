@@ -6,10 +6,13 @@
 package app.entities;
 
 import java.io.Serializable;
+import java.util.Base64;
 import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.Convert;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -33,7 +36,7 @@ import javax.xml.bind.annotation.XmlTransient;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Comic.findAll", query = "SELECT c FROM Comic c")
-    , @NamedQuery(name = "Comic.findByIdComic", query = "SELECT c FROM Comic c WHERE c.idComic = :idComic")
+    , @NamedQuery(name = "Comic.findById", query = "SELECT c FROM Comic c WHERE c.id = :id")
     , @NamedQuery(name = "Comic.findByNombre", query = "SELECT c FROM Comic c WHERE c.nombre = :nombre")
     , @NamedQuery(name = "Comic.findByIsbn", query = "SELECT c FROM Comic c WHERE c.isbn = :isbn")
     , @NamedQuery(name = "Comic.findByAnotacionPrivada", query = "SELECT c FROM Comic c WHERE c.anotacionPrivada = :anotacionPrivada")})
@@ -43,8 +46,8 @@ public class Comic implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "idComic")
-    private Integer idComic;
+    @Column(name = "id")
+    private Integer id;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 60)
@@ -56,7 +59,7 @@ public class Comic implements Serializable {
     @Column(name = "foto")
     private byte[] foto;
     @Size(max = 200)
-    @Column(name = "anotacionPrivada")
+    @Column(name = "anotacion_privada")
     private String anotacionPrivada;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "comic")
     private Collection<ComicHasSerie> comicHasSerieCollection;
@@ -64,21 +67,21 @@ public class Comic implements Serializable {
     public Comic() {
     }
 
-    public Comic(Integer idComic) {
-        this.idComic = idComic;
+    public Comic(Integer id) {
+        this.id = id;
     }
 
-    public Comic(Integer idComic, String nombre) {
-        this.idComic = idComic;
+    public Comic(Integer id, String nombre) {
+        this.id = id;
         this.nombre = nombre;
     }
 
-    public Integer getIdComic() {
-        return idComic;
+    public Integer getId() {
+        return id;
     }
 
-    public void setIdComic(Integer idComic) {
-        this.idComic = idComic;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getNombre() {
@@ -98,10 +101,11 @@ public class Comic implements Serializable {
     }
 
     public byte[] getFoto() {
-        return foto;
+       return foto;
     }
 
     public void setFoto(byte[] foto) {
+        
         this.foto = foto;
     }
 
@@ -125,7 +129,7 @@ public class Comic implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (idComic != null ? idComic.hashCode() : 0);
+        hash += (id != null ? id.hashCode() : 0);
         return hash;
     }
 
@@ -136,7 +140,7 @@ public class Comic implements Serializable {
             return false;
         }
         Comic other = (Comic) object;
-        if ((this.idComic == null && other.idComic != null) || (this.idComic != null && !this.idComic.equals(other.idComic))) {
+        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
         return true;
@@ -144,7 +148,7 @@ public class Comic implements Serializable {
 
     @Override
     public String toString() {
-        return "app.entities.Comic[ idComic=" + idComic + " ]";
+        return "app.entities.Comic[ id=" + id + " ]";
     }
     
 }

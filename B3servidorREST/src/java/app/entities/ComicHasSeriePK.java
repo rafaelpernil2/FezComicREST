@@ -20,42 +20,42 @@ public class ComicHasSeriePK implements Serializable {
 
     @Basic(optional = false)
     @NotNull
-    @Column(name = "comic_idComic")
-    private int comicidComic;
+    @Column(name = "id_comic")
+    private int idComic;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "serie_idserie")
-    private int serieIdserie;
+    @Column(name = "id_serie")
+    private int idSerie;
 
     public ComicHasSeriePK() {
     }
 
-    public ComicHasSeriePK(int comicidComic, int serieIdserie) {
-        this.comicidComic = comicidComic;
-        this.serieIdserie = serieIdserie;
+    public ComicHasSeriePK(int idComic, int idSerie) {
+        this.idComic = idComic;
+        this.idSerie = idSerie;
     }
 
-    public int getComicidComic() {
-        return comicidComic;
+    public int getIdComic() {
+        return idComic;
     }
 
-    public void setComicidComic(int comicidComic) {
-        this.comicidComic = comicidComic;
+    public void setIdComic(int idComic) {
+        this.idComic = idComic;
     }
 
-    public int getSerieIdserie() {
-        return serieIdserie;
+    public int getIdSerie() {
+        return idSerie;
     }
 
-    public void setSerieIdserie(int serieIdserie) {
-        this.serieIdserie = serieIdserie;
+    public void setIdSerie(int idSerie) {
+        this.idSerie = idSerie;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (int) comicidComic;
-        hash += (int) serieIdserie;
+        hash += (int) idComic;
+        hash += (int) idSerie;
         return hash;
     }
 
@@ -66,10 +66,10 @@ public class ComicHasSeriePK implements Serializable {
             return false;
         }
         ComicHasSeriePK other = (ComicHasSeriePK) object;
-        if (this.comicidComic != other.comicidComic) {
+        if (this.idComic != other.idComic) {
             return false;
         }
-        if (this.serieIdserie != other.serieIdserie) {
+        if (this.idSerie != other.idSerie) {
             return false;
         }
         return true;
@@ -77,7 +77,7 @@ public class ComicHasSeriePK implements Serializable {
 
     @Override
     public String toString() {
-        return "app.entities.ComicHasSeriePK[ comicidComic=" + comicidComic + ", serieIdserie=" + serieIdserie + " ]";
+        return "app.entities.ComicHasSeriePK[ idComic=" + idComic + ", idSerie=" + idSerie + " ]";
     }
     
 }
