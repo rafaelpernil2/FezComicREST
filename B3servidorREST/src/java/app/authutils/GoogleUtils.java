@@ -8,7 +8,6 @@ package app.authutils;
 import com.google.api.client.googleapis.auth.oauth2.GoogleIdToken;
 import com.google.api.client.googleapis.auth.oauth2.GoogleIdTokenVerifier;
 import com.google.api.client.http.HttpTransport;
-import com.google.api.client.http.LowLevelHttpRequest;
 import com.google.api.client.http.javanet.NetHttpTransport;
 import com.google.api.client.json.JsonFactory;
 import com.google.api.client.json.jackson2.JacksonFactory;
@@ -21,7 +20,7 @@ import java.util.Collections;
  * @author rafaelpernil
  */
 public class GoogleUtils {
-    private static String CLIENT_ID="20997473920-opi6u7sbies9c4eket8tjr767l72j8q5.apps.googleusercontent.com";
+    private static final String CLIENT_ID="20997473920-opi6u7sbies9c4eket8tjr767l72j8q5.apps.googleusercontent.com";
      public static Usuario validateToken(String idTokenString) throws IOException, GeneralSecurityException {
         Usuario usuario = null;
         

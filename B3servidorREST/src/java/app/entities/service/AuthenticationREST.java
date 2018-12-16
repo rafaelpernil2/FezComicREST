@@ -29,6 +29,8 @@ import javax.ws.rs.core.MediaType;
 @Path("auth")
 public class AuthenticationREST {
 
+    RolFacadeREST rolFacadeREST = lookupRolFacadeRESTBean();
+
     UserFacadeREST userFacadeREST = lookupUserFacadeRESTBean();
 
     public AuthenticationREST() {
@@ -46,7 +48,8 @@ public class AuthenticationREST {
             }
             if (u != null) {
                 if ((result = lookupUserFacadeRESTBean().find(u.getUserId())) == null) {
-                    result = new User(u.getUserId(),u.getName(),new Rol(2));
+                    
+                    result = new User(u.getUserId(),u.getName(), lookupRolFacadeRESTBean().find(2));
                     lookupUserFacadeRESTBean().create(result);
                 } else {
                     lookupUserFacadeRESTBean().edit(result);
@@ -62,6 +65,16 @@ public class AuthenticationREST {
         try {
             Context c = new InitialContext();
             return (UserFacadeREST) c.lookup("java:global/B3servidorREST/UserFacadeREST!app.entities.service.UserFacadeREST");
+        } catch (NamingException ne) {
+            Logger.getLogger(getClass().getName()).log(Level.SEVERE, "exception caught", ne);
+            throw new RuntimeException(ne);
+        }
+    }
+
+    private RolFacadeREST lookupRolFacadeRESTBean() {
+        try {
+            Context c = new InitialContext();
+            return (RolFacadeREST) c.lookup("java:global/B3servidorREST/RolFacadeREST!app.entities.service.RolFacadeREST");
         } catch (NamingException ne) {
             Logger.getLogger(getClass().getName()).log(Level.SEVERE, "exception caught", ne);
             throw new RuntimeException(ne);

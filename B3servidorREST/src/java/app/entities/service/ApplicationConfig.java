@@ -36,6 +36,7 @@ public class ApplicationConfig extends Application {
         resources.add(app.entities.service.SerieFacadeREST.class);
         resources.add(app.entities.service.UserFacadeREST.class);
         resources.add(app.utils.CORSSharingFilter.class);
+        
     }
     
 }
