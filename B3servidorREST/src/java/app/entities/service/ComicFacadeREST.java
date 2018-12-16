@@ -40,14 +40,14 @@ public class ComicFacadeREST extends AbstractFacade<Comic> {
 
     @POST
     @Override
-    @Consumes(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON + ";charset=utf-8")
     public void create(Comic entity) {
         super.create(entity);
     }
 
     @PUT
     @Path("{id}")
-    @Consumes(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON + ";charset=utf-8")
     public void edit(@PathParam("id") Integer id, Comic entity) {
         super.edit(entity);
     }
@@ -60,13 +60,13 @@ public class ComicFacadeREST extends AbstractFacade<Comic> {
 
     @GET
     @Path("{id}")
-    @Produces(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
     public Comic find(@PathParam("id") Integer id) {
         return super.find(id);
     }
      @GET
     @Path("nombre/{nombre}")
-    @Produces(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
     public Comic findComics(@PathParam("nombre") String nombre) {
         //app.entities.ComicHasSeriePK key = getPrimaryKey(id);
         
@@ -79,7 +79,7 @@ public class ComicFacadeREST extends AbstractFacade<Comic> {
     }
     @GET
     @Override
-    @Produces(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
     public List<Comic> findAll() {
        
         return super.findAll();
@@ -87,7 +87,7 @@ public class ComicFacadeREST extends AbstractFacade<Comic> {
 
     @GET
     @Path("{from}/{to}")
-    @Produces(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
     public List<Comic> findRange(@PathParam("from") Integer from, @PathParam("to") Integer to) {
         return super.findRange(new int[]{from, to});
     }

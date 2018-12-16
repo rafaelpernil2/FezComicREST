@@ -66,7 +66,7 @@ public class ComicHasSerieFacadeREST extends AbstractFacade<ComicHasSerie> {
 
     @POST
     @Override
-    @Consumes(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON + ";charset=utf-8")
     public void create(ComicHasSerie entity) {
         
         super.create(entity);
@@ -74,7 +74,7 @@ public class ComicHasSerieFacadeREST extends AbstractFacade<ComicHasSerie> {
 
     @PUT
     @Path("{id}")
-    @Consumes(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON + ";charset=utf-8")
     public void edit(@PathParam("id") PathSegment id, ComicHasSerie entity) {
         super.edit(entity);
     }
@@ -88,7 +88,7 @@ public class ComicHasSerieFacadeREST extends AbstractFacade<ComicHasSerie> {
 
     @GET
     @Path("comichasserie/{comicId}/{serieId}")
-    @Produces(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
     public ComicHasSerie find(@PathParam("comicId") int comicId,@PathParam("serieId") int serieId) {
         app.entities.ComicHasSeriePK key = new ComicHasSeriePK(comicId, serieId);
         return super.find(key);
@@ -96,7 +96,7 @@ public class ComicHasSerieFacadeREST extends AbstractFacade<ComicHasSerie> {
     
     @GET
     @Path("comics/{id}")
-    @Produces(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
     public List<Comic> findComics(@PathParam("id") int id) {
         //app.entities.ComicHasSeriePK key = getPrimaryKey(id);
         
@@ -112,7 +112,7 @@ public class ComicHasSerieFacadeREST extends AbstractFacade<ComicHasSerie> {
 
     @GET
     @Path("serie/{id}")
-    @Produces(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
     public List<Serie> findSerie(@PathParam("id") int id) {
         //app.entities.ComicHasSeriePK key = getPrimaryKey(id);
         
@@ -128,14 +128,14 @@ public class ComicHasSerieFacadeREST extends AbstractFacade<ComicHasSerie> {
     
     @GET
     @Override
-    @Produces(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
     public List<ComicHasSerie> findAll() {
         return super.findAll();
     }
 
     @GET
     @Path("{from}/{to}")
-    @Produces(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
     public List<ComicHasSerie> findRange(@PathParam("from") Integer from, @PathParam("to") Integer to) {
         return super.findRange(new int[]{from, to});
     }

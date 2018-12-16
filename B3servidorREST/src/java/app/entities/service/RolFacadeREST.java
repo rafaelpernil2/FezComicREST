@@ -38,14 +38,14 @@ public class RolFacadeREST extends AbstractFacade<Rol> {
 
     @POST
     @Override
-    @Consumes({MediaType.APPLICATION_JSON})
+    @Consumes({MediaType.APPLICATION_JSON + ";charset=utf-8"})
     public void create(Rol entity) {
         super.create(entity);
     }
 
     @PUT
     @Path("{id}")
-    @Consumes({MediaType.APPLICATION_JSON})
+    @Consumes({MediaType.APPLICATION_JSON + ";charset=utf-8"})
     public void edit(@PathParam("id") Integer id, Rol entity) {
         super.edit(entity);
     }
@@ -58,7 +58,7 @@ public class RolFacadeREST extends AbstractFacade<Rol> {
 
     @GET
     @Path("{id}")
-    @Produces({MediaType.APPLICATION_JSON})
+    @Produces({MediaType.APPLICATION_JSON + ";charset=utf-8"})
     public Rol find(@PathParam("id") Integer id) {
         return super.find(id);
     }
@@ -67,14 +67,14 @@ public class RolFacadeREST extends AbstractFacade<Rol> {
     
     @GET
     @Override
-    @Produces({MediaType.APPLICATION_JSON})
+    @Produces({MediaType.APPLICATION_JSON + ";charset=utf-8"})
     public List<Rol> findAll() {
         return super.findAll();
     }
 
     @GET
     @Path("{from}/{to}")
-    @Produces({MediaType.APPLICATION_JSON})
+    @Produces({MediaType.APPLICATION_JSON + ";charset=utf-8"})
     public List<Rol> findRange(@PathParam("from") Integer from, @PathParam("to") Integer to) {
         return super.findRange(new int[]{from, to});
     }
